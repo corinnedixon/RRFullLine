@@ -26,6 +26,7 @@ S4_DIR = 21   # Direction GPIO Pin
 S4_STEP = 23  # Step GPIO Pin
 
 GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 GPIO.setup(S1_DIR, GPIO.OUT)
 GPIO.setup(S1_STEP, GPIO.OUT)
 GPIO.setup(S2_DIR, GPIO.OUT)
