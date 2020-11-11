@@ -18,6 +18,7 @@ C5_DIR = 11   # Direction GPIO Pin
 C5_STEP = 35  # Step GPIO Pin
 
 GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 GPIO.setup(C5_DIR, GPIO.OUT)
 GPIO.setup(C5_STEP, GPIO.OUT)
 
