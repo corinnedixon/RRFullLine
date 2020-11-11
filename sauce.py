@@ -21,7 +21,7 @@ S1_STEP = 38  # Step GPIO Pin
 S2_DIR = 31   # Direction GPIO Pin
 S2_STEP = 33  # Step GPIO Pin
 S3_DIR = 29   # Direction GPIO Pin
-S3_STEP = 27  # Step GPIO Pin
+S3_STEP = 32  # Step GPIO Pin
 S4_DIR = 21   # Direction GPIO Pin
 S4_STEP = 23  # Step GPIO Pin
 
