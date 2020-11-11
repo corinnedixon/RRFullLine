@@ -10,5 +10,5 @@ Setup & Installation
 1. Install Raspbian to Raspberry Pi (any version)
 2. Clone this repository onto the Pi $ git clone https://github.com/corinnedixon/RRFullLine
 
-Usage & Details 
+Usage & Details
 Code runs with 7 Stepper Motors and 1 DC Motor. Ports can be adjusted in each code file. Timing and speeds can also be adjusted under variable declaration section of the files.
