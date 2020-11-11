@@ -16,10 +16,6 @@ spin_speed = 25 # Pizza spin motor speed (1/4 speed)
 global move_speed
 move_speed = 25 # Horizontal motion speed (1/4 speed)
 
-#Raspberry Pi set up
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-
 #***************************************MOTOR SET UP****************************************
 
 # Big stepper motor set up (spins)
