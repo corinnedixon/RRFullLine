@@ -14,8 +14,8 @@ cheesing = False
 #***************************************MOTOR SET UP****************************************
 
 # Cheese stepper motor set up
-C5_DIR = 17   # Direction GPIO Pin
-C5_STEP = 19  # Step GPIO Pin
+C5_DIR = 11   # Direction GPIO Pin
+C5_STEP = 35  # Step GPIO Pin
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(C5_DIR, GPIO.OUT)
