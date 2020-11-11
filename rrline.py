@@ -125,29 +125,29 @@ myFontLarge = font.Font(family='Helvetica', size=50, weight='bold')
 
 # Size buttons
 fourteenButton  = Button(screen, text = "14 in.", font = myFont, bg = "white", command = lambda: setSize(14), height = 2 , width = 4)
-fourteenButton.place(x=500, y=50)
+fourteenButton.place(x=575, y=25)
 
 twelveButton  = Button(screen, text = "12 in.", font = myFont, bg = "white", command = lambda: setSize(12), height = 2 , width = 4)
-twelveButton.place(x=350, y=50)
+twelveButton.place(x=400, y=25)
 
 tenButton  = Button(screen, text = "10 in.", font = myFont, bg = "white", command = lambda: setSize(10), height = 2 , width = 4)
-tenButton.place(x=200, y=50)
+tenButton.place(x=225, y=25)
 
 sevenButton  = Button(screen, text = "7 in.", font = myFont, bg = "white", command = lambda: setSize(7), height = 2 , width = 4)
-sevenButton.place(x=50, y=50)
+sevenButton.place(x=50, y=25)
 
 # Type buttons
-cheeseButton  = Button(screen, text = "Cheese", font = myFont, bg = "lightgrey", command = lambda: setMode(0), height = 2 , width = 5)
-cheeseButton.place(x=200, y=150)
+cheeseButton  = Button(screen, text = "Cheese", font = myFont, bg = "lightgrey", command = lambda: setMode(0), height = 1, width = 5)
+cheeseButton.place(x=150, y=150)
 
-peppButton  = Button(screen, text = "Pepp", font = myFont, bg = "lightgrey", command = lambda: setMode(1), height = 2 , width = 5)
-peppButton.place(x=400, y=150)
+peppButton  = Button(screen, text = "Pepp", font = myFont, bg = "lightgrey", command = lambda: setMode(1), height = 1, width = 5)
+peppButton.place(x=450, y=150)
 
 # Function buttons
 resetButton  = Button(screen, text = "RESET", font = myFontLarge, bg = "lightgreen", command = reset, height = 2 , width = 6)
-resetButton.place(x=100, y=300)
+resetButton.place(x=150, y=300)
 
 stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", command = stop, height = 2 , width = 6)
-stopButton.place(x=400, y=300)
+stopButton.place(x=450, y=300)
 
 mainloop()
