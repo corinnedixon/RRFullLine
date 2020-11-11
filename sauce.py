@@ -1,3 +1,8 @@
+import RPi.GPIO as GPIO
+import time
+import sys
+import datetime
+import threading
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
