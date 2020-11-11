@@ -2,6 +2,10 @@ from tkinter import *
 import tkinter.font as font
 import time
 import RPi.GPIO as GPIO
+import pepperoni
+import motors
+import cheese
+import sauce
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
@@ -42,6 +46,7 @@ GPIO.setwarnings(False)
 def setMode(new_mode):
     global mode
     mode = new_mode
+    runLine()
 
 def setSize(new_size):
     global size
@@ -116,31 +121,31 @@ screen.title("Full Line")
 
 # Fonts for screen
 myFont = font.Font(family='Helvetica', size=36, weight='bold')
-myFontLarge = font.Font(family='Helvetica', size=60, weight='bold')
+myFontLarge = font.Font(family='Helvetica', size=50, weight='bold')
 
 # Size buttons
 fourteenButton  = Button(screen, text = "14 in.", font = myFont, bg = "white", command = lambda: setSize(14), height = 2 , width = 4)
-fourteenButton.place(x=525, y=0)
+fourteenButton.place(x=500, y=50)
 
 twelveButton  = Button(screen, text = "12 in.", font = myFont, bg = "white", command = lambda: setSize(12), height = 2 , width = 4)
-twelveButton.place(x=350, y=0)
+twelveButton.place(x=350, y=50)
 
 tenButton  = Button(screen, text = "10 in.", font = myFont, bg = "white", command = lambda: setSize(10), height = 2 , width = 4)
-tenButton.place(x=175, y=0)
+tenButton.place(x=200, y=50)
 
 sevenButton  = Button(screen, text = "7 in.", font = myFont, bg = "white", command = lambda: setSize(7), height = 2 , width = 4)
-sevenButton.place(x=0, y=0)
+sevenButton.place(x=50, y=50)
 
 # Type buttons
-cheeseButton  = Button(screen, text = "Cheese", font = myFont, bg = "lightgrey", command = lambda: setMode(0), height = 2 , width = 4)
+cheeseButton  = Button(screen, text = "Cheese", font = myFont, bg = "lightgrey", command = lambda: setMode(0), height = 2 , width = 5)
 cheeseButton.place(x=200, y=150)
 
-peppButton  = Button(screen, text = "Pepp", font = myFont, bg = "lightgrey", command = lambda: setMode(1), height = 2 , width = 4)
+peppButton  = Button(screen, text = "Pepp", font = myFont, bg = "lightgrey", command = lambda: setMode(1), height = 2 , width = 5)
 peppButton.place(x=400, y=150)
 
 # Function buttons
 resetButton  = Button(screen, text = "RESET", font = myFontLarge, bg = "lightgreen", command = reset, height = 2 , width = 6)
-resetButton.place(x=200, y=300)
+resetButton.place(x=100, y=300)
 
 stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", command = stop, height = 2 , width = 6)
 stopButton.place(x=400, y=300)
