@@ -126,7 +126,7 @@ def stopAll():
   global spinning
   spinning = False
   #All motors stop
- try:
+  try:
     stopSpinning()
   except:
     pass
