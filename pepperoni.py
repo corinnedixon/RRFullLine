@@ -17,6 +17,7 @@ slicing = False
 RPWM = 2
 LPWM = 4
 
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(RPWM,GPIO.OUT)
 GPIO.setup(LPWM,GPIO.OUT)
 GPIO.output(RPWM, GPIO.LOW)
