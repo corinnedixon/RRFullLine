@@ -1,5 +1,5 @@
 from tkinter import *
-import tkinter.font as font
+import tkFont
 import time
 import RPi.GPIO as GPIO
 
