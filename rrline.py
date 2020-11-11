@@ -1,3 +1,7 @@
+from tkinter import *
+import tkinter.font as font
+import time
+import RPi.GPIO as GPIO
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
@@ -28,6 +32,10 @@ size = 14 # Default size is 14 inch
 # Run line
 global running
 running = False
+
+#Raspberry Pi set up
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 
 #*************************************BUTTON FUNCTIONS**************************************
 
