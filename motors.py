@@ -23,6 +23,7 @@ T6_DIR = 13   # Direction GPIO Pin
 T6_STEP = 15  # Step GPIO Pin
 
 GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 GPIO.setup(T6_DIR, GPIO.OUT)
 GPIO.setup(T6_STEP, GPIO.OUT)
 
