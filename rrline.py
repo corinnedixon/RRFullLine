@@ -1,5 +1,5 @@
 from tkinter import *
-import tkFont
+import tkinter.font as font
 import time
 import RPi.GPIO as GPIO
 
@@ -109,8 +109,8 @@ def runLine():
 #**************************************TKINTER SET UP***************************************
 
 # Fonts for screen
-myFont = tkFont.Font(family = 'Helvetica', size = 36, weight = 'bold')
-myFontLarge = tkFont.Font(family = 'Helvetica', size = 80, weight = 'bold')
+myFont = font.Font(family='Helvetica', size=36, weight='bold')
+myFontLarge = font.Font(family='Helvetica', size=60, weight='bold')
 
 # Size buttons
 fourteenButton  = Button(screen, text = "14 in.", font = myFont, bg = "white", command = lambda: setSize(14), height = 2 , width = 4)
