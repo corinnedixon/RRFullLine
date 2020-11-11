@@ -138,16 +138,16 @@ sevenButton.place(x=50, y=5)
 
 # Type buttons
 cheeseButton  = Button(screen, text = "Cheese", font = myFont, bg = "lightgrey", command = lambda: setMode(0), height = 1, width = 6)
-cheeseButton.place(x=150, y=125)
+cheeseButton.place(x=100, y=140)
 
 peppButton  = Button(screen, text = "Pepp", font = myFont, bg = "lightgrey", command = lambda: setMode(1), height = 1, width = 6)
-peppButton.place(x=450, y=125)
+peppButton.place(x=450, y=140)
 
 # Function buttons
 resetButton  = Button(screen, text = "RESET", font = myFontLarge, bg = "lightgreen", command = reset, height = 2 , width = 6)
-resetButton.place(x=150, y=225)
+resetButton.place(x=100, y=200)
 
 stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", command = stop, height = 2 , width = 6)
-stopButton.place(x=450, y=225)
+stopButton.place(x=450, y=200)
 
 mainloop()
