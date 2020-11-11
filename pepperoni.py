@@ -18,6 +18,7 @@ RPWM = 3
 LPWM = 7
 
 GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 GPIO.setup(RPWM,GPIO.OUT)
 GPIO.setup(LPWM,GPIO.OUT)
 GPIO.output(RPWM, GPIO.LOW)
