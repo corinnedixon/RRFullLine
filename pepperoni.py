@@ -14,8 +14,8 @@ slicing = False
 #***************************************MOTOR SET UP****************************************
 
 #DC slice motor set up
-RPWM = 2
-LPWM = 4
+RPWM = 3
+LPWM = 7
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(RPWM,GPIO.OUT)
