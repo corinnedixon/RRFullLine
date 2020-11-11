@@ -73,7 +73,7 @@ def runLine():
     
     # Run corresponding saucer pumps
     sauce.pumpProgram()
-    motors.spinProgam(25)
+    motors.spinProgram(25)
     time.sleep(sauce_time)
     sauce.stopPumping()
     motors.stopSpinning()
@@ -85,7 +85,7 @@ def runLine():
     
     # Cheese the pizza
     cheese.cheeseProgram()
-    motors.spinProgam(25)
+    motors.spinProgram(25)
     motors.inProgram(10)
     time.sleep(cheese_time)
     sauce.stopPumping()
@@ -94,7 +94,7 @@ def runLine():
     # if pepp mode, pepp and move to end...otherwise, just go to end
     if(mode == 1):
         # pepp the pizza
-        motors.spinProgam(25)
+        motors.spinProgram(25)
         motors.inProgram(10)
         pepperoni.sliceProgram()
         time.sleep(pepp_time)
