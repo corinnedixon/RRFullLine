@@ -108,6 +108,12 @@ def runLine():
     
 #**************************************TKINTER SET UP***************************************
 
+# TK screen set up
+screen = Tk()
+screen.overrideredirect(1)
+screen.geometry('800x480')
+screen.title("Full Line")
+
 # Fonts for screen
 myFont = font.Font(family='Helvetica', size=36, weight='bold')
 myFontLarge = font.Font(family='Helvetica', size=60, weight='bold')
@@ -138,3 +144,5 @@ resetButton.place(x=100, y=200)
 
 stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", command = stop, height = 2 , width = 6)
 stopButton.place(x=300, y=200)
+
+mainloop()
