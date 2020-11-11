@@ -17,6 +17,7 @@ cheesing = False
 C5_DIR = 17   # Direction GPIO Pin
 C5_STEP = 19  # Step GPIO Pin
 
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(C5_DIR, GPIO.OUT)
 GPIO.setup(C5_STEP, GPIO.OUT)
 
