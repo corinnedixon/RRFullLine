@@ -88,7 +88,7 @@ def runLine():
     motors.spinProgram(25)
     motors.inProgram(10)
     time.sleep(cheese_time)
-    sauce.stopPumping()
+    cheese.stopCheesing()
     motors.stopAll()
     
     # if pepp mode, pepp and move to end...otherwise, just go to end
