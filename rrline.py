@@ -6,36 +6,37 @@ import pepperoni
 import motors
 import cheese
 import sauce
+import screens
 
 #***********************************VARIABLE DECLARATIONS***********************************
 
 # Run times for each step of pizza process (in seconds)
-global initial_move
-initial_move = 1 # Time for movement of pizza after size/mode are set
-global sauce_time
-sauce_time = 3 # Time for sauce / spin
+global initial_steps
+initial_steps = 100 # Steps for movement of pizza after size/mode are set
+global sauce_spin_steps
+sauce_spin_steps = 300 # Steps that pizza spins for sauce stage
 global to_cheese
-to_cheese = 1 # Time of movement for pizza to cheeser
-global cheese_time
-cheese_time = 2 # Amount of time for putting cheese on pizza
-global pepp_time
-pepp_time = 2 # Amount of time for putting pepperoni on pizza
+to_cheese = 100 # Steps for movement of pizza to cheeser
+global cheese_steps
+cheese_steps = 200 # Amount of steps for putting cheese on pizza
+global pepp_steps
+pepp_steps = 200 # Amount of steps for putting pepperoni on pizza
 global end_pepp
-end_pepp = 1 # Amount of time from pepperoni to end
+end_pepp = 100 # Steps from pepperoni to end
 global end_cheese
-end_cheese = 3 # Amount of time from cheese to end
+end_cheese = 300 # Steps from cheese to end
 global to_beginning
-to_beginning = 3 # Amount of time from end to start
+to_beginning = 300 # Steps from end to start
 
 # Mode / Size
 global mode
-mode = 0 # Default mode is 0 for cheese
+mode = -1 # No default mode
 global size
 size = 14 # Default size is 14 inch
 
-# Run line
-global running
-running = False
+# Double click
+global click
+click = 0
 
 #Raspberry Pi set up
 GPIO.setmode(GPIO.BOARD)
@@ -44,12 +45,22 @@ GPIO.setwarnings(False)
 #*************************************BUTTON FUNCTIONS**************************************
 
 def setMode(new_mode):
+    global click
     global mode
-    mode = new_mode
-    runLine()
+    if mode == new_mode:
+        click = click + 1
+    else:
+        click = 0
+        mode = new_mode
+    
+    if click == 1:
+        click = 0
+        runLine()
 
 def setSize(new_size):
+    global click
     global size
+    click = 0
     size = new_size
     
 def reset():
@@ -66,28 +77,24 @@ def stop():
 #************************************FULL LINE FUNCTION*************************************
 
 def runLine():
+    print("RUNNING LINE\n")
+
     # Move horizontally to sauce
-    motors.inProgram(25)
-    time.sleep(initial_move)
-    motors.stopMoving()
+    motors.inFunc(25, initial_steps)
     
     # Run corresponding saucer pumps
     sauce.pumpProgram()
-    motors.spinProgram(25)
-    time.sleep(sauce_time)
+    motors.spinFunc(25, sauce_spin_steps)
     sauce.stopPumping()
     motors.stopSpinning()
     
     # Move horizontally to cheese
-    motors.inProgram(25)
-    time.sleep(to_cheese)
-    motors.stopMoving()
+    motors.inProgram(25, to_cheese)
     
     # Cheese the pizza
     cheese.cheeseProgram()
     motors.spinProgram(25)
-    motors.inProgram(10)
-    time.sleep(cheese_time)
+    motors.inFunc(10, cheese_steps)
     cheese.stopCheesing()
     motors.stopAll()
     
@@ -95,27 +102,22 @@ def runLine():
     if(mode == 1):
         # pepp the pizza
         motors.spinProgram(25)
-        motors.inProgram(10)
         pepperoni.sliceProgram()
-        time.sleep(pepp_time)
+        motors.inFunc(10, pepp_steps)
         pepperoni.stopSlicing()
         motors.stopAll()
         
         # move to end
-        motors.inProgram(25)
-        time.sleep(end_pepp)
-        motors.stopMoving()
+        motors.inFunc(25, end_pepp)
     else:
         # just move to end
-        motors.inProgram(25)
-        time.sleep(end_cheese)
-        motors.stopMoving()
+        motors.inFunc(25, end_cheese)
     
 #**************************************TKINTER SET UP***************************************
 
 # TK screen set up
 screen = Tk()
-#screen.overrideredirect(1)
+screen.overrideredirect(1)
 screen.geometry('800x480')
 screen.title("Full Line")
 
@@ -144,10 +146,17 @@ peppButton  = Button(screen, text = "Pepp", font = myFont, bg = "lightgrey", com
 peppButton.place(x=450, y=135)
 
 # Function buttons
-resetButton  = Button(screen, text = "RESET", font = myFontLarge, bg = "lightgreen", command = reset, height = 2 , width = 6)
+resetButton  = Button(screen, text = "RESET", font = myFontLarge, bg = "lightgreen", command = reset, height = 2, width = 6)
 resetButton.place(x=100, y=210)
 
-stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", command = stop, height = 2 , width = 6)
+stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", command = stop, height = 2, width = 6)
 stopButton.place(x=450, y=210)
+
+# Other screen buttons
+settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: screens.settings(screen), height = 1, width = 4)
+settingsButton.place(x=50, y=300)
+
+helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: screens.help(screen), height = 1, width = 4)
+helpButton.place(x=500, y=300)
 
 mainloop()
