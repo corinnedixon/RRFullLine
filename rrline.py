@@ -64,8 +64,7 @@ def setSize(new_size):
     size = new_size
     
 def reset():
-    motors.outProgram(30)
-    time.sleep(to_beginning)
+    motors.outFunc(30, to_beginning)
     motors.stopMoving()
 
 def stop():
@@ -89,7 +88,7 @@ def runLine():
     motors.stopSpinning()
     
     # Move horizontally to cheese
-    motors.inProgram(25, to_cheese)
+    motors.inFunc(25, to_cheese)
     
     # Cheese the pizza
     cheese.cheeseProgram()
