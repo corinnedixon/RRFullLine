@@ -36,18 +36,16 @@ GPIO.setup(T7_STEP, GPIO.OUT)
 
 #****************************************PIZZA SPIN*****************************************
 
-#Function for spin
 #Functions for starting and stopping spin
 def spinProgram(speed):
-    global spinning  #create global
-    spinning = True
-
     # Create new thread
     spin = threading.Thread(target=spinFunc, args=(speed,1,))
     # Start new thread
     spin.start()
 
 def spinFunc(speed, steps):
+  global spinning
+  spinning = True
   spin_delay = (100-speed)/50000
   while spinning and steps > 0:
     if spinning == False:
@@ -67,6 +65,8 @@ def stopSpinning():
 #**************************************PIZZA MOVEMENT***************************************
 #Functions for moving motor in and out
 def inFunc(speed, steps):
+  global movingIn
+  movingIn = True
   move_delay = (100-speed)/1000000
   GPIO.output(T7_DIR, CCW)
   while movingIn and steps > 0:
@@ -80,6 +80,8 @@ def inFunc(speed, steps):
       steps = steps - 1
 
 def outFunc(speed, steps):
+  global movingOut
+  movingOut = True
   move_delay = (100-speed)/1000000
   GPIO.output(T7_DIR, CW)
   while movingOut and steps > 0:
