@@ -36,103 +36,78 @@ GPIO.setup(T7_STEP, GPIO.OUT)
 
 #****************************************PIZZA SPIN*****************************************
 
+#Function for spin
 #Functions for starting and stopping spin
 def spinProgram(speed):
     global spinning  #create global
     spinning = True
 
     # Create new thread
-    spin = threading.Thread(target=spinFunc, args=(speed,))
+    spin = threading.Thread(target=spinFunc, args=(speed,1,))
     # Start new thread
     spin.start()
-    
-def spinFunc(speed):
-  while spinning:
+
+def spinFunc(speed, steps):
+  spin_delay = (100-speed)/50000
+  while spinning and steps > 0:
     if spinning == False:
       break
     else:
-      spin_delay = (100-speed)/50000
       GPIO.output(T6_STEP, GPIO.HIGH)
       time.sleep(spin_delay)
       GPIO.output(T6_STEP, GPIO.LOW)
       time.sleep(spin_delay)
+      steps = steps - 1
 
 def stopSpinning():
   global spinning
   spinning = False
+  GPIO.output(T6_STEP, GPIO.LOW)
 
 #**************************************PIZZA MOVEMENT***************************************
 #Functions for moving motor in and out
-def inProgram(speed):
-    global movingIn  #create global
-    movingIn = True
-    global movingOut
-    movingOut = False
-
-    # Create new thread
-    moveIn = threading.Thread(target=inFunc, args=(speed,))
-    # Start new thread
-    moveIn.start()
-    
-def inFunc(speed):
-  while movingIn:
+def inFunc(speed, steps):
+  move_delay = (100-speed)/1000000
+  GPIO.output(T7_DIR, CCW)
+  while movingIn and steps > 0:
     if movingIn == False:
       break
     else:
-      move_delay = (100-speed)/1000000
-      GPIO.output(T7_DIR, CCW)
       GPIO.output(T7_STEP, GPIO.HIGH)
       time.sleep(move_delay)
       GPIO.output(T7_STEP, GPIO.LOW)
       time.sleep(move_delay)
+      steps = steps - 1
 
-def outProgram(speed):
-    global movingOut  #create global
-    movingOut = True
-    global movingIn
-    movingIn = False
-
-    # Create new thread
-    moveOut = threading.Thread(target=outFunc, args=(speed,))
-    # Start new thread
-    moveOut.start()
-    
-def outFunc(speed):
-  while movingOut:
+def outFunc(speed, steps):
+  move_delay = (100-speed)/1000000
+  GPIO.output(T7_DIR, CW)
+  while movingOut and steps > 0:
     if movingOut == False:
       break
     else:
-      move_delay = (100-speed)/1000000
-      GPIO.output(T7_DIR, CW)
       GPIO.output(T7_STEP, GPIO.HIGH)
       time.sleep(move_delay)
       GPIO.output(T7_STEP, GPIO.LOW)
       time.sleep(move_delay)
+      steps = steps - 1
 
 def stopMoving():
   global movingIn
   global movingOut
   movingIn = False
   movingOut = False
+  GPIO.output(T7_STEP, GPIO.LOW)
   
 #**************************************STOP EVERYTHING**************************************
 def stopAll():
   #All variables False
-  global slicing
-  slicing = False
   global movingIn
   global movingOut
   movingIn = False
   movingOut = False
   global spinning
   spinning = False
-  #All motors stop
-  try:
-    stopSpinning()
-  except:
-    pass
-  try:
-    stopMoving()
-  except:
-    pass
+  GPIO.output(T6_STEP, GPIO.LOW)
+  GPIO.output(T7_STEP, GPIO.LOW)
   
