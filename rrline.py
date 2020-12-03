@@ -326,10 +326,10 @@ stopButton  = Button(screen, text = "STOP", font = myFontLarge, bg = "red", comm
 stopButton.place(x=450, y=210)
 
 # Other screen buttons
-settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: screens.settings(screen), height = 1, width = 6)
+settingsButton  = Button(screen, text = "Settings", font = myFont, bg = "grey", command = lambda: settings(screen), height = 1, width = 6)
 settingsButton.place(x=50, y=380)
 
-helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: screens.help(screen), height = 1, width = 6)
+helpButton  = Button(screen, text = "Help", font = myFont, bg = "grey", command = lambda: help(screen), height = 1, width = 6)
 helpButton.place(x=500, y=380)
 
 mainloop()
