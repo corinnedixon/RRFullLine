@@ -64,20 +64,22 @@ def stopSpinning():
 
 #**************************************PIZZA MOVEMENT***************************************
 #Functions for moving motor in and out
-def inFunc(speed, steps):
+def inFunc(slope, const, steps):
   global movingIn
   movingIn = True
-  move_delay = (100-speed)/1000000
   GPIO.output(T7_DIR, CCW)
-  while movingIn and steps > 0:
+  count = 0
+  while movingIn and count > steps:
+    move_delay = slope*count+const
     if movingIn == False:
       break
     else:
+    
       GPIO.output(T7_STEP, GPIO.HIGH)
       time.sleep(move_delay)
       GPIO.output(T7_STEP, GPIO.LOW)
       time.sleep(move_delay)
-      steps = steps - 1
+      count = count + 1
 
 def outFunc(speed, steps):
   global movingOut
