@@ -252,8 +252,8 @@ def stop():
 def runLine():
     print("RUNNING LINE\n")
 
-    # Move horizontally to sauce
-    motors.inFunc(25, initial_steps)
+    # Move horizontally to sauce (slope, initial delay, steps)
+    motors.inFunc(0, 0.0025, initial_steps)
     
     # Run corresponding saucer pumps
     sauce.pumpProgram()
@@ -261,13 +261,13 @@ def runLine():
     sauce.stopPumping()
     motors.stopSpinning()
     
-    # Move horizontally to cheese
-    motors.inFunc(25, to_cheese)
+    # Move horizontally to cheese (slope, initial delay, steps)
+    motors.inFunc(0, 0.0025, to_cheese)
     
     # Cheese the pizza
     cheese.cheeseProgram()
     motors.spinProgram(25)
-    motors.inFunc(10, cheese_steps)
+    motors.inFunc(0.0001, 0.001, cheese_steps)
     cheese.stopCheesing()
     motors.stopAll()
     
@@ -276,15 +276,15 @@ def runLine():
         # pepp the pizza
         motors.spinProgram(25)
         pepperoni.sliceProgram()
-        motors.inFunc(10, pepp_steps)
+        motors.inFunc(0.0001, 0.001, pepp_steps)
         pepperoni.stopSlicing()
         motors.stopAll()
         
-        # move to end
-        motors.inFunc(25, end_pepp)
+        # move to end (slope, initial delay, steps)
+        motors.inFunc(0, 0.0025, end_pepp)
     else:
-        # just move to end
-        motors.inFunc(25, end_cheese)
+        # just move to end (slope, initial delay, steps)
+        motors.inFunc(0, 0.0025, end_cheese)
     
 #**************************************TKINTER SET UP***************************************
 
