@@ -44,7 +44,7 @@ def spinProgram(slope, const, steps):
     spin.start()
 
 def spinFunc(slope, const, steps):
-  print("SPIN")
+
   global spinning
   spinning = True
   count = 0
@@ -53,6 +53,7 @@ def spinFunc(slope, const, steps):
     if spinning == False:
       break
     else:
+      print("SPIN")
       GPIO.output(T6_STEP, GPIO.HIGH)
       time.sleep(spin_delay)
       GPIO.output(T6_STEP, GPIO.LOW)
@@ -67,7 +68,7 @@ def stopSpinning():
 #**************************************PIZZA MOVEMENT***************************************
 #Functions for moving motor in and out
 def inFunc(slope, const, steps):
-  print("IN")
+
   global movingIn
   movingIn = True
   GPIO.output(T7_DIR, CCW)
@@ -77,6 +78,7 @@ def inFunc(slope, const, steps):
     if movingIn == False:
       break
     else:
+      print("IN")
       GPIO.output(T7_STEP, GPIO.HIGH)
       time.sleep(move_delay)
       GPIO.output(T7_STEP, GPIO.LOW)
