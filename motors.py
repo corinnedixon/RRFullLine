@@ -37,17 +37,18 @@ GPIO.setup(T7_STEP, GPIO.OUT)
 #****************************************PIZZA SPIN*****************************************
 
 #Functions for starting and stopping spin
-def spinProgram(speed):
+def spinProgram(slope, const, steps):
     # Create new thread
-    spin = threading.Thread(target=spinFunc, args=(speed,1,))
+    spin = threading.Thread(target=spinFunc, args=(slope, const, steps,))
     # Start new thread
     spin.start()
 
-def spinFunc(speed, steps):
+def spinFunc(slope, const, steps):
   global spinning
   spinning = True
-  spin_delay = (100-speed)/50000
-  while spinning and steps > 0:
+  count = 0
+  while spinning and count < steps:
+    spin_delay = slope*count+const
     if spinning == False:
       break
     else:
@@ -55,7 +56,7 @@ def spinFunc(speed, steps):
       time.sleep(spin_delay)
       GPIO.output(T6_STEP, GPIO.LOW)
       time.sleep(spin_delay)
-      steps = steps - 1
+      count = count + 1
 
 def stopSpinning():
   global spinning
@@ -74,7 +75,6 @@ def inFunc(slope, const, steps):
     if movingIn == False:
       break
     else:
-    
       GPIO.output(T7_STEP, GPIO.HIGH)
       time.sleep(move_delay)
       GPIO.output(T7_STEP, GPIO.LOW)
