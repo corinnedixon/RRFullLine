@@ -24,6 +24,8 @@ cheese_steps = 200 # Amount of steps for putting cheese on pizza
 
 global pepp_steps
 pepp_steps = 200 # Amount of steps for putting pepperoni on pizza
+global pepp_spin_steps
+pepp_spin_steps = 100 # Steps for spinning of pizza during pepperoni
 global end_pepp
 end_pepp = 100 # Steps from pepperoni to end
 global end_cheese
