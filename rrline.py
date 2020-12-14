@@ -14,10 +14,14 @@ global initial_steps
 initial_steps = 100 # Steps for movement of pizza after size/mode are set
 global sauce_spin_steps
 sauce_spin_steps = 300 # Steps that pizza spins for sauce stage
+
 global to_cheese
 to_cheese = 100 # Steps for movement of pizza to cheeser
+global cheese_spin_steps
+cheese_spin_steps = 100 # Steps for spinning of pizza during cheese
 global cheese_steps
 cheese_steps = 200 # Amount of steps for putting cheese on pizza
+
 global pepp_steps
 pepp_steps = 200 # Amount of steps for putting pepperoni on pizza
 global end_pepp
@@ -257,7 +261,7 @@ def runLine():
     
     # Run corresponding saucer pumps
     sauce.pumpProgram()
-    motors.spinFunc(25, sauce_spin_steps)
+    motors.spinFunc(0.0001, 0.001, sauce_spin_steps)
     sauce.stopPumping()
     motors.stopSpinning()
     
@@ -266,7 +270,7 @@ def runLine():
     
     # Cheese the pizza
     cheese.cheeseProgram()
-    motors.spinProgram(25)
+    motors.spinProgram(0.0001, 0.001, cheese_spin_steps)
     motors.inFunc(0.0001, 0.001, cheese_steps)
     cheese.stopCheesing()
     motors.stopAll()
@@ -274,7 +278,7 @@ def runLine():
     # if pepp mode, pepp and move to end...otherwise, just go to end
     if(mode == 1):
         # pepp the pizza
-        motors.spinProgram(25)
+        motors.spinProgram(0.0001, 0.001, pepp_spin_steps)
         pepperoni.sliceProgram()
         motors.inFunc(0.0001, 0.001, pepp_steps)
         pepperoni.stopSlicing()
