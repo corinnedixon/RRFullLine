@@ -53,7 +53,6 @@ def spinFunc(slope, const, steps):
     if spinning == False:
       break
     else:
-      print("SPIN")
       GPIO.output(T6_STEP, GPIO.HIGH)
       time.sleep(spin_delay)
       GPIO.output(T6_STEP, GPIO.LOW)
@@ -78,7 +77,6 @@ def inFunc(slope, const, steps):
     if movingIn == False:
       break
     else:
-      print("IN")
       GPIO.output(T7_STEP, GPIO.HIGH)
       time.sleep(move_delay)
       GPIO.output(T7_STEP, GPIO.LOW)
