@@ -69,7 +69,7 @@ def inFunc(slope, const, steps):
   movingIn = True
   GPIO.output(T7_DIR, CCW)
   count = 0
-  while movingIn and count > steps:
+  while movingIn and count < steps:
     move_delay = slope*count+const
     if movingIn == False:
       break
