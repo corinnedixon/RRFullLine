@@ -19,8 +19,8 @@ shaking = False
 #***************************************MOTOR SET UP****************************************
 
 # Cheese stepper motor set up
-C5_DIR = 11   # Direction GPIO Pin
-C5_STEP = 35  # Step GPIO Pin
+C5_DIR = 35   # Direction GPIO Pin
+C5_STEP = 37  # Step GPIO Pin
 
 # DC shaker motor set up
 C8_RPWM = 0 #FIX
