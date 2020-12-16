@@ -7,7 +7,6 @@ import threading
 #***********************************VARIABLE DECLARATIONS***********************************
 
 # Motor speed
-global pump_speed
 s1_speed = 25 # Sauce stepper motor 1 speed
 s2_speed = 25 # Sauce stepper motor 2 speed
 s3_speed = 25 # Sauce stepper motor 3 speed
@@ -18,12 +17,12 @@ s4_speed = 25 # Sauce stepper motor 4 speed
 # Sauce stepper motor set up (pumps)
 S1_DIR = 36   # Direction GPIO Pin
 S1_STEP = 38  # Step GPIO Pin
-S2_DIR = 31   # Direction GPIO Pin
-S2_STEP = 33  # Step GPIO Pin
-S3_DIR = 29   # Direction GPIO Pin
-S3_STEP = 32  # Step GPIO Pin
-S4_DIR = 21   # Direction GPIO Pin
-S4_STEP = 23  # Step GPIO Pin
+S2_DIR = 24   # Direction GPIO Pin
+S2_STEP = 26  # Step GPIO Pin
+S3_DIR = 31   # Direction GPIO Pin
+S3_STEP = 33  # Step GPIO Pin
+S4_DIR = 32   # Direction GPIO Pin
+S4_STEP = 29  # Step GPIO Pin
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
