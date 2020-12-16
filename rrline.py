@@ -272,8 +272,10 @@ def runLine():
     
     # Cheese the pizza
     cheese.cheeseProgram()
+    cheese.shakeProgram()
     motors.spinProgram(0.0001, 0.001, cheese_spin_steps)
     motors.inFunc(0.0001, 0.001, cheese_steps)
+    cheese.shakeProgram()
     cheese.stopCheesing()
     motors.stopAll()
     
