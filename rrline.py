@@ -11,19 +11,19 @@ import sauce
 
 # Run times for each step of pizza process (in seconds)
 global initial_steps
-initial_steps = 100 # Steps for movement of pizza after size/mode are set
+initial_steps = 1500 # Steps for movement of pizza after size/mode are set
 global sauce_spin_steps
-sauce_spin_steps = 300 # Steps that pizza spins for sauce stage
+sauce_spin_steps = 3200 # Steps that pizza spins for sauce stage
 
 global to_cheese
-to_cheese = 100 # Steps for movement of pizza to cheeser
+to_cheese = 17000 # Steps for movement of pizza to cheeser
 global cheese_spin_steps
-cheese_spin_steps = 100 # Steps for spinning of pizza during cheese
+cheese_spin_steps = 100000 # Steps for spinning of pizza during cheese
 global cheese_steps
-cheese_steps = 200 # Amount of steps for putting cheese on pizza
+cheese_steps = 16500 # Amount of steps for putting cheese on pizza
 
 global pepp_steps
-pepp_steps = 200 # Amount of steps for putting pepperoni on pizza
+pepp_steps = 10000 # Amount of steps for putting pepperoni on pizza
 global pepp_spin_steps
 pepp_spin_steps = 100 # Steps for spinning of pizza during pepperoni
 global end_pepp
@@ -259,22 +259,22 @@ def runLine():
     print("RUNNING LINE\n")
 
     # Move horizontally to sauce (slope, initial delay, steps)
-    motors.inFunc(0, 0.0025, initial_steps)
+    motors.inFunc(0, 0.0000025, initial_steps)
     
     # Run corresponding saucer pumps
     sauce.pumpProgram()
-    motors.spinFunc(0.0001, 0.001, sauce_spin_steps)
+    motors.spinFunc(0, 0.001, sauce_spin_steps)
     sauce.stopPumping()
     motors.stopSpinning()
     
     # Move horizontally to cheese (slope, initial delay, steps)
-    motors.inFunc(0, 0.0025, to_cheese)
+    motors.inFunc(0, 0.0000025, to_cheese)
     
     # Cheese the pizza
     cheese.cheeseProgram()
     cheese.shakeProgram()
-    motors.spinProgram(0.0001, 0.001, cheese_spin_steps)
-    motors.inFunc(0.0001, 0.001, cheese_steps)
+    motors.spinProgram(-0.0000000001, 0.00001, cheese_spin_steps)
+    motors.inFunc(0, 0.0001, cheese_steps)
     cheese.shakeProgram()
     cheese.stopCheesing()
     motors.stopAll()
@@ -284,7 +284,7 @@ def runLine():
         # pepp the pizza
         motors.spinProgram(0.0001, 0.001, pepp_spin_steps)
         pepperoni.sliceProgram()
-        motors.inFunc(0.0001, 0.001, pepp_steps)
+        motors.inFunc(0, 0.00001, pepp_steps)
         pepperoni.stopSlicing()
         motors.stopAll()
         
