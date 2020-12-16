@@ -19,8 +19,8 @@ move_speed = 25 # Horizontal motion speed (1/4 speed)
 #***************************************MOTOR SET UP****************************************
 
 # Big stepper motor set up (spins)
-T6_DIR = 13   # Direction GPIO Pin
-T6_STEP = 15  # Step GPIO Pin
+T6_DIR = 10   # Direction GPIO Pin
+T6_STEP = 8  # Step GPIO Pin
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -28,8 +28,8 @@ GPIO.setup(T6_DIR, GPIO.OUT)
 GPIO.setup(T6_STEP, GPIO.OUT)
 
 # Small stepper motor set up (moves)
-T7_DIR = 24   # Direction GPIO Pin
-T7_STEP = 26  # Step GPIO Pin
+T7_DIR = 13   # Direction GPIO Pin
+T7_STEP = 15  # Step GPIO Pin
 
 GPIO.setup(T7_DIR, GPIO.OUT)
 GPIO.setup(T7_STEP, GPIO.OUT)
@@ -116,4 +116,3 @@ def stopAll():
   spinning = False
   GPIO.output(T6_STEP, GPIO.LOW)
   GPIO.output(T7_STEP, GPIO.LOW)
-  
