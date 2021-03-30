@@ -34,85 +34,114 @@ T7_STEP = 15  # Step GPIO Pin
 GPIO.setup(T7_DIR, GPIO.OUT)
 GPIO.setup(T7_STEP, GPIO.OUT)
 
+#****************************************TABLE CLASS****************************************
+
+class table:
+    def init(pin1=8,pin2=15):
+        global turnclk
+        turnclk=GPIO.PWM(pin1,500)
+        turnclk.start(0)
+        global tranclk
+        tranclk=GPIO.PWM(pin2,1000)
+        tranclk.start(0)
+        
+    def move(dist,freq=2000,pin3=13):
+        global REV
+
+        REV = 0 #Revolution Count
+        VAl = 0 #Currrent mag value
+        TEMP = 0 #Previous mag value
+        PRESS = 0 #switch value
+        
+        trandir=dist<0
+        GPIO.output(pin3,trandir)
+        global tranclk
+        tranclk.ChangeFrequency(freq)
+        tranclk.ChangeDutyCycle(50)
+        for i in range(abs(dist)):
+            PRESS = switchCallback(40)
+            if PRESS == 1:
+                break
+            time.sleep(0.05)
+            VAL = sensorCallback(11)
+
+            if TEMP == 0 and VAL == 1:
+                REV = REV + 1
+                TEMP = 1
+                print('Rvolution count: ')
+                print(REV)
+            else:
+                TEMP = 0
+
+        tranclk.ChangeDutyCycle(0)
+        
+    def turn(freq):
+        global turnclk
+        if freq==0:
+            turnclk.ChangeDutyCycle(0)
+        else:
+            turnclk.ChangeDutyCycle(50)
+            turnclk.ChangeFrequency(freq)
+            
+    def home(freq=2000):
+        global tranclk
+        GPIO.output(13,GPIO.HIGH)
+        tranclk.ChangeDutyCycle(50)
+        while GPIO.event_detected(11)==0:
+            time.sleep(0.01)
+        print('nice')
+        tranclk.ChangeDutyCycle(0)
+        
+    def stopSpin():
+        global turnclk
+        turnclk.ChangeDutyCycle(0)
+        
+    def stopMove():
+        global tranclk
+        tranclk.ChangeDutyCycle(0)
+
 #****************************************PIZZA SPIN*****************************************
 
+#Functions for variable manipulation
+def setSpinFrequency(freq):
+    global turnclk
+    turnclk.ChangeFrequency(freq)
+
+def setSpinDutyCycle(dc):
+    global turnclk
+    turnclk.ChangeDutyCycle(dc)
+
 #Functions for starting and stopping spin
-def spinProgram(slope, const, steps):
-    # Create new thread
-    spin = threading.Thread(target=spinFunc, args=(slope, const, steps,))
-    # Start new thread
-    spin.start()
-
-def spinFunc(slope, const, steps):
-
-  global spinning
-  spinning = True
-  count = 0
-  while spinning and count < steps:
-    spin_delay = slope*count+const
-    if spinning == False:
-      break
-    else:
-      GPIO.output(T6_STEP, GPIO.HIGH)
-      time.sleep(spin_delay)
-      GPIO.output(T6_STEP, GPIO.LOW)
-      time.sleep(spin_delay)
-      count = count + 1
+def spinProgram(speed):
+    # Start spinning
+    table.turn(speed)
 
 def stopSpinning():
-  global spinning
-  spinning = False
-  GPIO.output(T6_STEP, GPIO.LOW)
+    table.stopSpin()
 
 #**************************************PIZZA MOVEMENT***************************************
+
+#Functions for variable manipulation
+def setMoveFrequency(freq):
+    global tranclk
+    tranclk.ChangeFrequency(freq)
+
+def setMoveDutyCycle(dc):
+    global tranclk
+    tranclk.ChangeDutyCycle(dc)
+
 #Functions for moving motor in and out
-def inFunc(slope, const, steps):
+def goHome():
+    table.home()
 
-  global movingIn
-  movingIn = True
-  GPIO.output(T7_DIR, CCW)
-  count = 0
-  while movingIn and count < steps:
-    move_delay = slope*count+const
-    if movingIn == False:
-      break
-    else:
-      GPIO.output(T7_STEP, GPIO.HIGH)
-      time.sleep(move_delay)
-      GPIO.output(T7_STEP, GPIO.LOW)
-      time.sleep(move_delay)
-      count = count + 1
-
-def outFunc(speed, steps):
-  global movingOut
-  movingOut = True
-  move_delay = (100-speed)/1000000
-  GPIO.output(T7_DIR, CW)
-  while movingOut and steps > 0:
-    if movingOut == False:
-      break
-    else:
-      GPIO.output(T7_STEP, GPIO.HIGH)
-      time.sleep(move_delay)
-      GPIO.output(T7_STEP, GPIO.LOW)
-      time.sleep(move_delay)
-      steps = steps - 1
+def moveProgram(distance):
+  table.move(distance)
 
 def stopMoving():
-  global movingIn
-  global movingOut
-  movingIn = False
-  movingOut = False
-  GPIO.output(T7_STEP, GPIO.LOW)
+    table.stopMove()
   
 #**************************************STOP EVERYTHING**************************************
+
 def stopAll():
-  #All variables False
-  global movingIn
-  global movingOut
-  movingIn = False
-  movingOut = False
-  global spinning
-  spinning = False
-  GPIO.output(T6_STEP, GPIO.LOW)
-  GPIO.output(T7_STEP, GPIO.LOW)
+  stopSpinning()
+  stopMoving()

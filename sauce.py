@@ -68,4 +68,3 @@ def pumpFunc(motor_pin, speed):
 def stopPumping():
   global pumping
   pumping = False
-    
