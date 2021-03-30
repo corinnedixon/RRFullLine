@@ -23,8 +23,8 @@ C5_DIR = 35   # Direction GPIO Pin
 C5_STEP = 37  # Step GPIO Pin
 
 # DC shaker motor set up
-C8_RPWM = 0 #FIX
-C8_LPWM = 0 #FIX
+C8_RPWM = 3
+C8_LPWM = 7
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
